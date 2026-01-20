@@ -1,0 +1,12 @@
+# Redirection automatique vers le dossier version-php-sqlite
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Si on n'est pas déjà dans version-php-sqlite
+    RewriteCond %{REQUEST_URI} !^/version-php-sqlite/
+    
+    # Rediriger vers version-php-sqlite
+    RewriteRule ^(.*)$ version-php-sqlite/$1 [L]
+</IfModule>

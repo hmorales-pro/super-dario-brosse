@@ -1,131 +1,222 @@
 # 🎮 Super Dario Brosse
 
-Un jeu de plateforme inspiré de Super Mario Bros, avec système de scoring global et classement multi-joueurs.
+Jeu de plateforme inspiré de Super Mario Bros avec système de scoring et classements multi-joueurs.
 
-## 🚀 Déploiement avec Docker
+## ✨ Fonctionnalités
 
-### Prérequis
-- Docker et Docker Compose installés
-- Un VPS avec Dokploy (ou Docker Compose)
+- 🎯 4 niveaux avec différents biomes (Plaines, Désert, Glace, Lave)
+- ❤️ Système de santé configurable (1-10 PV)
+- 🏆 Système de classement par difficulté
+- 💰 Collection de pièces
+- ⏱️ Chronomètre de performance
+- 📱 Contrôles tactiles pour mobile
+- 🎨 Design responsive
 
-### Lancement en local
+## 🚀 Versions disponibles
 
-1. **Cloner le projet**
+Ce jeu est disponible en **3 versions** selon vos besoins :
+
+### 🌐 Version 1 : Hébergement Statique (localStorage)
+- **Fichiers** : 4 fichiers (HTML, CSS, JS)
+- **Scores** : Stockés localement dans le navigateur
+- **Classement** : Local uniquement
+- **Installation** : Upload FTP et c'est tout
+- **Idéal pour** : Tests rapides, usage personnel
+
+📦 **Archive** : `super-dario-brosse-hebergement.zip`  
+📖 **Guide** : `DEPLOIEMENT-FTP.txt` | `README-HEBERGEMENT.md`
+
+### 🐘 Version 2 : PHP + SQLite (⭐ RECOMMANDÉ)
+- **Fichiers** : 6 fichiers (HTML, CSS, JS, PHP, .htaccess)
+- **Scores** : Base SQLite (fichier unique)
+- **Classement** : Global partagé entre tous les joueurs
+- **Installation** : Upload FTP (aucune config DB)
+- **Idéal pour** : Jeu public, vrai classement compétitif
+
+📦 **Archive** : `super-dario-brosse-php-sqlite.zip`  
+📖 **Guide** : `DEPLOIEMENT-PHP.txt` | `README-PHP.md`
+
+### 🖥️ Version 3 : Serveur Node.js
+- **Fichiers** : Fichiers racine (server.js, package.json, etc.)
+- **Scores** : Fichier JSON
+- **Classement** : Global partagé entre tous les joueurs
+- **Installation** : `npm install` + `node server.js`
+- **Idéal pour** : Développeurs, VPS, tests locaux
+
+🚀 **Démarrage** : `./start.sh` ou `start.bat`  
+📖 **Guide** : `LANCEMENT-RAPIDE.txt` | `README-STANDALONE.md`
+
+## 📊 Tableau comparatif
+
+| Critère | Statique | PHP+SQLite | Node.js |
+|---------|----------|------------|---------|
+| Installation | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Classement global | ❌ | ✅ | ✅ |
+| Hébergement requis | Basique | PHP mutualisé | VPS |
+| Configuration | Aucune | Aucune | Node.js |
+| Prix mensuel | 2-5€ | 2-5€ | 5-15€ |
+
+## 💡 Quelle version choisir ?
+
+- **Vous voulez tester rapidement** → Version Statique
+- **Vous voulez un classement global** → Version PHP+SQLite ⭐
+- **Vous êtes développeur** → Version Node.js
+
+📖 Pour un guide détaillé : consultez `README-CHOIX-VERSION.txt`
+
+## 🚀 Démarrage rapide
+
+### Version PHP+SQLite (recommandé)
 ```bash
-git clone <repo-url>
-cd super-dario-brosse
+# 1. Dézipper l'archive
+unzip super-dario-brosse-php-sqlite.zip
+
+# 2. Uploader les 6 fichiers via FTP dans public_html/
+
+# 3. Accéder au jeu
+https://votredomaine.com/
 ```
 
-2. **Copier le fichier d'environnement**
+### Version Statique
 ```bash
-cp backend/.env.example backend/.env
+# 1. Dézipper l'archive
+unzip super-dario-brosse-hebergement.zip
+
+# 2. Uploader les 4 fichiers via FTP
+
+# 3. Accéder au jeu
+https://votredomaine.com/
 ```
 
-3. **Lancer avec Docker Compose**
+### Version Node.js
 ```bash
-docker-compose up -d
+# 1. Installer les dépendances
+npm install
+
+# 2. Démarrer le serveur
+node server.js
+
+# 3. Ouvrir le navigateur
+http://localhost:3000
 ```
-
-4. **Accéder au jeu**
-- Frontend: http://localhost
-- API Backend: http://localhost:3000
-- Health check: http://localhost:3000/health
-
-### Architecture
-
-```
-├── frontend/           # Fichiers HTML/CSS/JS statiques (Nginx)
-├── backend/            # API Node.js + Express
-│   ├── server.js       # Serveur API
-│   ├── Dockerfile      # Image Docker backend
-│   └── package.json    # Dépendances Node.js
-├── docker-compose.yml  # Configuration Docker multi-services
-└── nginx.conf          # Configuration Nginx (proxy vers API)
-```
-
-### Services Docker
-
-- **db**: PostgreSQL 15 avec volume persistant
-- **backend**: API Node.js (port 3000)
-- **frontend**: Nginx servant les fichiers statiques et proxy API (port 80)
-
-### Base de données
-
-La base de données PostgreSQL stocke les scores avec la structure suivante:
-
-```sql
-CREATE TABLE scores (
-  id SERIAL PRIMARY KEY,
-  player_name VARCHAR(20) NOT NULL,
-  points INTEGER NOT NULL,
-  level INTEGER NOT NULL,
-  coins INTEGER NOT NULL,
-  time INTEGER NOT NULL,
-  health INTEGER NOT NULL,
-  won BOOLEAN NOT NULL,
-  difficulty VARCHAR(20) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-### API Endpoints
-
-- `GET /api/scores` - Récupérer tous les scores (top 10 par difficulté)
-- `GET /api/scores/:difficulty` - Récupérer le top 10 d'une difficulté
-- `POST /api/scores` - Ajouter un nouveau score
-- `GET /health` - Health check
-
-### Déploiement sur Dokploy
-
-1. Créer un nouveau projet dans Dokploy
-2. Connecter votre repository Git
-3. Sélectionner "Docker Compose"
-4. Dokploy détectera automatiquement le `docker-compose.yml`
-5. Configurer les variables d'environnement si nécessaire
-6. Déployer !
-
-### Volumes persistants
-
-Les données de la base de données sont stockées dans un volume Docker nommé `postgres_data`, garantissant la persistance des scores même après redémarrage des containers.
-
-## 🎯 Fonctionnalités
-
-- ✅ 4 niveaux avec différents biomes (Plaines, Désert, Glace, Lave)
-- ✅ Système de santé configurable (1-10 PV)
-- ✅ Ennemis avec différents patterns (patrouille, vol)
-- ✅ Pièges mortels (pics)
-- ✅ Système de scoring avec 4 catégories de difficulté
-- ✅ Classement global multi-joueurs
-- ✅ Design responsive (mobile, tablette, desktop)
-- ✅ Contrôles tactiles pour mobile
 
 ## 🎮 Contrôles
 
-- **Desktop**: Flèches ← → pour se déplacer, ↑ ou Espace pour sauter
-- **Mobile**: Boutons tactiles à l'écran
+- **⬅️ ➡️** Flèches : Déplacer Dario
+- **⬆️ Espace** : Sauter
+- **Mobile** : Boutons tactiles automatiques
+
+## 📁 Structure du projet
+
+```
+super-dario-brosse/
+├── version-hebergement/          # Version statique
+│   ├── index.html
+│   ├── game.js
+│   ├── scoring-static.js
+│   └── styles.css
+│
+├── version-php-sqlite/           # Version PHP (recommandé)
+│   ├── index.html
+│   ├── game.js
+│   ├── scoring.js
+│   ├── styles.css
+│   ├── api.php
+│   └── .htaccess
+│
+├── server.js                     # Serveur Node.js
+├── package.json                  # Dépendances Node.js
+├── start.sh / start.bat          # Scripts de démarrage
+│
+└── Documentation/
+    ├── README-CHOIX-VERSION.txt
+    ├── DEPLOIEMENT-FTP.txt
+    ├── DEPLOIEMENT-PHP.txt
+    ├── README-HEBERGEMENT.md
+    ├── README-PHP.md
+    └── README-STANDALONE.md
+```
+
+## 🛠️ Technologies utilisées
+
+- **Frontend** : HTML5, CSS3, JavaScript (Canvas API)
+- **Backend (optionnel)** :
+  - Version PHP : PHP 7+, SQLite
+  - Version Node.js : Express.js, Node.js
+
+## 🔒 Sécurité
+
+### Version PHP+SQLite
+- ✅ Requêtes préparées PDO (protection SQL injection)
+- ✅ Validation des données côté serveur
+- ✅ Protection .htaccess du fichier scores.db
+- ✅ Limitation de la longueur des pseudos
+
+### Version Node.js
+- ✅ Validation des entrées
+- ✅ Fichier JSON protégé (pas d'accès direct)
+
+## 📱 Compatibilité
+
+- ✅ Chrome 60+
+- ✅ Firefox 55+
+- ✅ Safari 11+
+- ✅ Edge 79+
+- ✅ Mobile (iOS Safari, Chrome Android)
+
+## 🎯 Système de difficulté
+
+Le jeu propose 4 niveaux de difficulté basés sur les points de vie :
+
+- 💀 **Hardcore** : 1 PV
+- ⚔️ **Normal** : 2-3 PV
+- 😊 **Facile** : 4-6 PV
+- 🌈 **Très Facile** : 7-10 PV
+
+Chaque catégorie a son propre classement !
 
 ## 📊 Système de scoring
 
-- Points par niveau: 1000 × niveau atteint
-- Bonus victoire: 5000 points
-- Points par pièce: 100 × pièces collectées
-- Bonus temps: max 2000 points (diminue avec le temps)
+Le score est calculé selon :
+- **Niveau atteint** : 1000 pts par niveau
+- **Victoire totale** : Bonus de 5000 pts
+- **Pièces collectées** : 100 pts par pièce
+- **Temps** : Bonus selon rapidité
 
-### Catégories de difficulté
+## 🐛 Résolution de problèmes
 
-- 💀 **Hardcore**: 1 PV
-- ⚔️ **Normal**: 2-3 PV
-- 😊 **Facile**: 4-6 PV
-- 🌈 **Très Facile**: 7-10 PV
+### Le jeu ne se charge pas
+- Vérifiez que tous les fichiers sont bien uploadés
+- Ouvrez la console développeur (F12)
+- Vérifiez les noms de fichiers (sensible à la casse)
 
-## 🛠️ Technologies
+### Les scores ne se sauvent pas (PHP)
+- Vérifiez les permissions du dossier (755 ou 775)
+- Testez l'API : `https://votredomaine.com/api/scores`
+- Vérifiez que SQLite est activé (phpinfo)
 
-- **Frontend**: HTML5 Canvas, Vanilla JavaScript
-- **Backend**: Node.js, Express
-- **Base de données**: PostgreSQL 15
-- **Containerisation**: Docker, Docker Compose
-- **Serveur web**: Nginx
+### Erreur 404 sur l'API (PHP)
+- Vérifiez que .htaccess a été uploadé
+- Vérifiez que mod_rewrite est activé
 
-## 📝 License
+## 📄 Licence
 
-MIT
+Ce projet est fourni à des fins éducatives.
+
+## 🤝 Contribution
+
+Pour toute amélioration ou bug :
+1. Ouvrez la console développeur (F12)
+2. Notez l'erreur exacte
+3. Vérifiez la documentation correspondante
+
+## 📧 Support
+
+Consultez les fichiers README spécifiques à chaque version :
+- `README-HEBERGEMENT.md` pour la version statique
+- `README-PHP.md` pour la version PHP+SQLite
+- `README-STANDALONE.md` pour la version Node.js
+
+---
+
+🎮 **Bon jeu !** 🎮

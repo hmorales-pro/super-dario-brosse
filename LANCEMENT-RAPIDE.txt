@@ -1,0 +1,50 @@
+╔════════════════════════════════════════════════════════════════╗
+║         🎮 SUPER DARIO BROSSE - VERSION STANDALONE 🎮         ║
+╚════════════════════════════════════════════════════════════════╝
+
+📋 PRÉREQUIS :
+   Node.js installé (télécharger sur https://nodejs.org/)
+
+🚀 DÉMARRAGE RAPIDE :
+
+   Sur Windows :
+   ✓ Double-cliquez sur "start.bat"
+
+   Sur macOS / Linux :
+   ✓ Ouvrez un terminal
+   ✓ Tapez : ./start.sh
+
+   Ou manuellement :
+   ✓ npm install express
+   ✓ node server.js
+
+🌐 ACCÈS AU JEU :
+   Ouvrez votre navigateur sur : http://localhost:3000
+
+📁 FICHIERS IMPORTANTS :
+   • server.js      → Serveur Node.js
+   • scores.json    → Sauvegarde des scores (créé automatiquement)
+   • index.html     → Page du jeu
+   • game.js        → Logique du jeu
+   • scoring.js     → Système de scoring
+   • styles.css     → Design
+
+🎯 FONCTIONNALITÉS :
+   ✅ 4 niveaux avec différents biomes
+   ✅ Système de santé configurable (1-10 PV)
+   ✅ Classement multi-joueurs
+   ✅ Sauvegarde automatique dans scores.json
+   ✅ 4 catégories de difficulté
+   ✅ Contrôles tactiles mobile
+
+🛑 ARRÊTER LE SERVEUR :
+   Appuyez sur Ctrl + C dans le terminal
+
+📊 RÉINITIALISER LES SCORES :
+   Supprimez le fichier "scores.json"
+
+❓ PROBLÈMES :
+   • Port 3000 déjà utilisé → Changez le port dans server.js
+   • Scores ne se sauvent pas → Vérifiez les droits d'écriture
+
+Bon jeu ! 🎉

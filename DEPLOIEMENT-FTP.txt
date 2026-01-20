@@ -1,0 +1,74 @@
+╔════════════════════════════════════════════════════════════════╗
+║      🌐 DÉPLOIEMENT SUR HÉBERGEMENT MUTUALISÉ (FTP) 🌐        ║
+╚════════════════════════════════════════════════════════════════╝
+
+📁 FICHIERS À UPLOADER (4 fichiers uniquement) :
+
+   ✅ index.html
+   ✅ game.js
+   ✅ scoring-static.js
+   ✅ styles.css
+
+⚠️  NE PAS UPLOADER :
+   ❌ server.js (serveur Node.js, pas nécessaire)
+   ❌ scoring.js (version API, remplacée par scoring-static.js)
+   ❌ package.json, node_modules, etc.
+   ❌ Les fichiers Docker (backend/, frontend/, etc.)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 ÉTAPES D'INSTALLATION :
+
+1️⃣  Connectez-vous à votre FTP :
+   • Utilisez FileZilla, Cyberduck, ou le gestionnaire de fichiers cPanel
+   • Host: ftp.votredomaine.com
+   • Username: votre_username
+   • Password: votre_password
+
+2️⃣  Allez dans le dossier web :
+   • Généralement : public_html/ ou www/
+   • Créez un sous-dossier si besoin (ex: /jeu/)
+
+3️⃣  Uploadez les 4 fichiers listés ci-dessus
+
+4️⃣  Accédez au jeu :
+   • https://votredomaine.com/index.html
+   • ou https://votredomaine.com/jeu/ (si sous-dossier)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💾 SYSTÈME DE SCORES :
+
+Les scores sont sauvegardés dans le NAVIGATEUR de chaque joueur
+(localStorage - pas de base de données requise)
+
+⚠️  Limitation : Les scores sont LOCAUX à chaque navigateur
+   → Pas de classement global entre différents joueurs
+   → Chaque joueur voit uniquement ses propres scores
+
+Pour un classement global multi-joueurs, utilisez la version
+avec serveur Node.js (voir README-STANDALONE.md)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ AVANTAGES VERSION STATIQUE :
+
+   • Aucun serveur à configurer
+   • Fonctionne sur TOUT hébergement mutualisé
+   • Pas de base de données requise
+   • Installation en 2 minutes
+   • Gratuit (hébergement mutualisé = quelques euros/mois)
+   • Fonctionne même en ouvrant index.html en local
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 DOCUMENTATION COMPLÈTE :
+
+   Consultez README-HEBERGEMENT.md pour :
+   • Personnalisation du jeu
+   • Résolution de problèmes
+   • Configuration avancée
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Bon jeu ! 🎮

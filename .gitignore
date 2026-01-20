@@ -3,3 +3,12 @@ node_modules/
 .DS_Store
 npm-debug.log
 *.log
+
+# Fichiers de scores (données utilisateur)
+scores.json
+scores.db
+scores.db-journal
+
+# Fichiers temporaires
+*.tmp
+*.temp

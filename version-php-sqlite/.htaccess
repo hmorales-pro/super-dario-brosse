@@ -1,0 +1,37 @@
+# Configuration Apache pour l'API PHP
+
+# Activer le moteur de réécriture
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Rediriger les requêtes /api/scores vers api.php
+    RewriteRule ^api/scores$ api.php [L,QSA]
+</IfModule>
+
+# Protection du fichier de base de données SQLite
+<Files "scores.db">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(db|sqlite|sqlite3|log)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Activer la compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Cache pour les fichiers statiques
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+</IfModule>

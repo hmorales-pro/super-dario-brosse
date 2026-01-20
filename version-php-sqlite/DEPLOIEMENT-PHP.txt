@@ -1,0 +1,151 @@
+╔════════════════════════════════════════════════════════════════╗
+║         🚀 DÉPLOIEMENT VERSION PHP + SQLITE 🚀                 ║
+╚════════════════════════════════════════════════════════════════╝
+
+🎯 CETTE VERSION OFFRE UN CLASSEMENT GLOBAL MULTI-JOUEURS !
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📁 FICHIERS À UPLOADER (6 fichiers + 1 optionnel) :
+
+   ✅ index.html          (Page du jeu)
+   ✅ game.js             (Logique du jeu)
+   ✅ scoring.js          (Système de scoring avec API)
+   ✅ styles.css          (Design)
+   ✅ api.php             (API REST pour les scores)
+   ✅ .htaccess           (Configuration Apache)
+   📖 README-PHP.md       (Documentation - optionnel)
+
+⚠️  ATTENTION : Ne PAS uploader scoring-static.js !
+   → Utilisez scoring.js (version avec API)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 PRÉREQUIS HÉBERGEUR :
+
+   ✅ PHP 7.0+ (inclus dans 99% des hébergements mutualisés)
+   ✅ SQLite activé (inclus par défaut avec PHP)
+   ✅ mod_rewrite Apache (pour .htaccess)
+
+   💡 OVH, O2switch, Hostinger, etc. → Tout est OK par défaut !
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 INSTALLATION VIA FTP :
+
+1️⃣  Connectez-vous à votre FTP :
+   • FileZilla, Cyberduck, ou gestionnaire cPanel
+   • Host: ftp.votredomaine.com
+
+2️⃣  Allez dans le dossier web :
+   • Généralement : public_html/ ou www/
+   • Ou créez un sous-dossier : public_html/jeu/
+
+3️⃣  Uploadez les 6 fichiers listés ci-dessus
+
+4️⃣  Vérifiez les permissions :
+   • Le dossier doit avoir les droits d'écriture
+   • chmod 755 ou 775 (clic droit > Permissions)
+
+5️⃣  Accédez au jeu :
+   • https://votredomaine.com/
+   • La base de données scores.db sera créée automatiquement !
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💾 BASE DE DONNÉES SQLite :
+
+📂 Fichier créé automatiquement : scores.db
+
+   • Création lors du premier score sauvegardé
+   • Pas de configuration manuelle requise
+   • Sécurisé via .htaccess (pas d'accès direct)
+   • Un seul fichier = facile à sauvegarder
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔒 SÉCURITÉ :
+
+   ✅ Requêtes préparées PDO (anti-injection SQL)
+   ✅ Validation des données côté serveur
+   ✅ Protection .htaccess du fichier scores.db
+   ✅ Limitation pseudo à 20 caractères
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎮 FONCTIONNALITÉS :
+
+   ✅ Classement global partagé entre TOUS les joueurs
+   ✅ 4 catégories de difficulté distinctes
+   ✅ Top 100 meilleurs scores par catégorie
+   ✅ Sauvegarde permanente (survit aux redémarrages)
+   ✅ Calcul automatique du rang du joueur
+   ✅ Compatible mobile avec contrôles tactiles
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 TESTER L'API :
+
+   Une fois uploadé, testez :
+   
+   GET  https://votredomaine.com/api/scores
+   → Doit renvoyer un JSON avec les scores
+
+   Si erreur 404 :
+   → Vérifiez que .htaccess a été uploadé
+   → Vérifiez que mod_rewrite est activé chez votre hébergeur
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔧 GESTION DES SCORES :
+
+   📊 Voir les scores :
+      Dans le jeu via "🏆 Voir les scores"
+
+   🗑️ Réinitialiser :
+      Supprimez scores.db via FTP
+      (sera recréé automatiquement vide)
+
+   💾 Sauvegarder :
+      Téléchargez scores.db via FTP
+      Gardez une copie locale
+
+   📤 Exporter :
+      Ouvrez scores.db avec DB Browser for SQLite
+      Exportez en CSV, JSON, etc.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ PROBLÈMES FRÉQUENTS :
+
+   🔴 Erreur 500 (Internal Server Error)
+      → Vérifiez permissions dossier (755 ou 775)
+      → Activez les logs d'erreur PHP
+
+   🔴 API retourne 404
+      → Vérifiez que .htaccess est uploadé
+      → Vérifiez que mod_rewrite est activé
+
+   🔴 Scores ne se sauvegardent pas
+      → Permissions dossier insuffisantes
+      → Console navigateur (F12) pour voir erreurs
+
+   🔴 "SQLite not found"
+      → Contactez votre hébergeur
+      → 99% des hébergeurs l'ont activé par défaut
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 DOCUMENTATION COMPLÈTE :
+
+   Consultez README-PHP.md pour :
+   • Configuration avancée
+   • API REST détaillée
+   • Optimisations
+   • Migration de données
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 Votre jeu est prêt à accueillir des joueurs du monde entier ! 🌍
+
+Bon jeu ! 🎮
