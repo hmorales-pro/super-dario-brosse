@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    <script src="scoring-static.js"></script>
+    <script src="scoring.js"></script>
     <script src="game.js"></script>
 </body>
 </html>
